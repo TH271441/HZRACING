@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>HZ Racing Esport Team</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png">
+
+  <style>
+    body {
+      margin: 0;
+      background-image: url('https://i.postimg.cc/Y9X4XtyH/download.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .top-bar img {
+      width: 100px;
+    }
+
+    .btn-cronometro {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-size: 15px;
+      text-decoration: none;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-cronometro:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    header {
+      padding: 100px 20px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: white;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    .main-content {
+      padding: 60px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 60px;
+    }
+
+    .main-content-text {
+      flex: 1;
+      text-align: left;
+    }
+
+    .main-content-image {
+      flex: 1;
+      max-width: 450px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.7);
+      border: 2px solid #0af;
+    }
+
+    .main-content-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .main-content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px black;
+      text-align: center;
+    }
+
+    .main-content p {
+      font-size: 1.2rem;
+      margin: 0 0 15px;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    .pilotos-carrusel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 30px;
+      padding: 40px 20px;
+      scroll-behavior: smooth;
+    }
+
+    .pilotos-carrusel::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .pilotos-carrusel::-webkit-scrollbar-thumb {
+      background: #00cfff;
+      border-radius: 4px;
+    }
+
+    .tarjeta-piloto {
+      background-color: #000421;
+      border-radius: 20px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 0 15px #0af;
+      position: relative;
+      text-align: center;
+      scroll-snap-align: center;
+      flex: 0 0 auto;
+    }
+
+    .tarjeta-piloto img.piloto-foto {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .tarjeta-piloto h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+
+    .tarjeta-piloto h3 img {
+      width: 20px;
+      height: 15px;
+      vertical-align: middle;
+      margin-left: 5px;
+      border-radius: 3px;
+    }
+
+    .tarjeta-piloto p {
+      margin: 5px 0;
+    }
+
+    .tarjeta-piloto .numero {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #0000ff;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-weight: bold;
+    }
+
+    .sponsors {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      border-top: 2px solid #0af;
+    }
+
+    .sponsors img {
+      height: 60px;
+      max-width: 120px;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.85);
+      text-align: center;
+      padding: 20px;
+      border-top: 2px solid #0af;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .footer-links a {
+      color: #0af;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .fotos3 {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .fotos3 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 15px;
+    }
+
+    .fotos3 > div {
+      width: 30%;
+      aspect-ratio: 4 / 5; /* Cambiado de 4/3 a 4/5 para la proporción solicitada */
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+    }
+
+    .team-bio {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      margin: 20px auto;
+      max-width: 1000px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+      border: 1px solid #0af;
+    }
+
+    .team-bio h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #00cfff;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    .team-bio p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    .team-bio strong {
+      color: #00cfff;
+    }
+
+    /* Estilos para dispositivos móviles */
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      
+      .main-content-image {
+        margin-top: 30px;
+        max-width: 100%;
+      }
+      
+      .fotos3 {
+        flex-direction: column;
+      }
+      
+      .fotos3 > div {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      
+      .team-bio {
+        padding: 20px;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <img src="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png" alt="HZ Racing Logo">
+    <a class="btn-cronometro" href="https://th271441.github.io/CROHZRACING/" target="_blank">Cronómetro</a>
+  </div>
+
+  <header>
+    <h1>Hz Racing Esport Team</h1>
+  </header>
+
+  <section class="main-content">
+    <div class="main-content-text">
+      <h2>¿Qué es HZ Racing?</h2>
+      <p>HZ Racing Esport Team es pasión convertida en velocidad.</p>
+      <p>Un equipo de carreras virtuales donde el espíritu competitivo, la precisión milimétrica.</p>
+      <p>y el amor por el automovilismo se fusionan para romper límites.</p>
+      <p>No somos solo un nombre en la parrilla.</p>
+      <p>Somos un estandarte.</p>
+      <p>Un rugido digital que atraviesa pistas, simuladores y corazones.</p>
+      <p>HZ Racing no compite...</p>
+      <p>HZ Racing domina.</p>
+    </div>
+    
+    <div class="main-content-image">
+      <img src="https://i.postimg.cc/brmbCvj0/senna720s.jpg" alt="HZ Racing en acción">
+    </div>
+  </section>
+
+  <!-- Biografía del equipo -->
+  <section class="team-bio">
+    <h2>Nuestra Historia</h2>
+    <p>Desde su fundación en 2023, HZ Racing Esport Team ha crecido con una sola misión: dominar el mundo del simracing con excelencia, pasión y disciplina.</p>
+    <p>El equipo ha competido al más alto nivel en múltiples plataformas, destacándose por su enfoque profesional, su constante desarrollo de talento y su compromiso con la victoria. Con pilotos que representan la nueva generación del automovilismo virtual, HZ Racing se ha consolidado como una fuerza emergente en la escena internacional.</p>
+    <p>Impulsados por el objetivo de convertirnos en una de las escuderías más exitosas del simracing global, hemos apostado por la formación de pilotos de élite a través de <strong>HZ Academy</strong>, una iniciativa que forja a las futuras leyendas del volante digital.</p>
+    <p>Con sede en México y espíritu competitivo sin fronteras, nos preparamos para afrontar cada temporada con determinación, innovación y el rugir digital de nuestros motores.</p>
+  </section>
+
+  <!-- Carrusel de pilotos -->
+  <section class="pilotos-carrusel">
+    <!-- Pilotos -->
+    <div class="tarjeta-piloto">
+      <img src="https://i.postimg.cc/3rDnn1gq/EMMCAM.jpg" alt="Emmanuel Campa" class="piloto-foto">
+      <h3>Emmanuel Campa 
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/330px-Flag_of_Mexico.svg.png" alt="MX">
+      </h3>
+      <p><strong style="color: #00cfff;">Categoría:</strong> Formula 1</p>
+      <p>Lugar de nacimiento: México</p>
+      <p>Simuladores: FX_R, CPM</p>
+      <div class="numero">#72</div>
+    </div>
+
+    <div class="tarjeta-piloto">
+      <img src="https://i.postimg.cc/2yqdJkbv/FERRIV.jpg" alt="Fernando Rivera" class="piloto-foto">
+      <h3>Fernando Rivera 
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Flag_of_Honduras.svg/1920px-Flag_of_Honduras.svg.png" alt="HD">
+      </h3>
+      <p><strong style="color: #00cfff;">Categoría:</strong> GT3</p>
+      <p>Lugar de nacimiento: Honduras</p>
+      <p>Simuladores: GT7, CPM</p>
+      <div class="numero">#20</div>
+    </div>
+
+    <div class="tarjeta-piloto">
+        <img src="https://i.postimg.cc/fb9fBTd9/ANDMOL.png" alt="Anderson Molina" class="piloto-foto">
+        <h3>Anderson Molina 
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Flag_of_Nicaragua.svg/800px-Flag_of_Nicaragua.svg.png" alt="NG">
+        </h3>
+        <p><strong style="color: #00cfff;">Categoría:</strong> formula 1</p>
+        <p>Lugar de nacimiento: Nicaragua</p>
+        <p>Simuladores:CPM</p>
+        <div class="numero">#27</div>
+      </div>
+
+      <div class="tarjeta-piloto">
+        <img src="https://i.postimg.cc/VvY9fqVq/DENNPAT.png" alt="Dennis Patiño" class="piloto-foto">
+        <h3>Dennis Patiño 
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/330px-Flag_of_Mexico.svg.png" alt="MX">
+        </h3>
+        <p><strong style="color: #00cfff;">Categoría:</strong> GT3</p>
+        <p>Lugar de nacimiento: México</p>
+        <p>Simuladores: GT7, CPM</p>
+        <div class="numero">#7</div>
+      </div>
+
+      <div class="tarjeta-piloto">
+        <img src="https://i.postimg.cc/NMv7Vq8P/ENRSIL.png" alt="Enrique Silva" class="piloto-foto">
+        <h3>Enrique Silva 
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/330px-Flag_of_Mexico.svg.png" alt="MX">
+        </h3>
+        <p><strong style="color: #00cfff;">Categoría:</strong> WEC</p>
+        <p>Lugar de nacimiento: México</p>
+        <p>Simuladores: RC3, CPM</p>
+        <div class="numero">#30</div>
+      </div>
+
+      <div class="tarjeta-piloto">
+        <img src="https://i.postimg.cc/MT0bJPdZ/LANALM.png" alt="Landon Almanza" class="piloto-foto">
+        <h3>Landon Almanza 
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/330px-Flag_of_Mexico.svg.png" alt="MX">
+        </h3>
+        <p><strong style="color: #00cfff;">Categoría:</strong> RALLY</p>
+        <p>Lugar de nacimiento: México</p>
+        <p>Simuladores: CPM</p>
+        <div class="numero">#25</div>
+      </div>
+  </section>
+  
+  <div class="fotos3">
+    <div><img src="https://i.postimg.cc/rw0WjcZW/F1.jpg" alt="Foto 1"></div>
+    <div><img src="https://i.postimg.cc/jdkPyCct/LMP1.jpg" alt="Foto 2"></div>
+    <div><img src="https://i.postimg.cc/vHm515W0/PORSHE.jpg" alt="Foto 3"></div>
+  </div>
+
+  <!-- Patrocinadores -->
+  <section class="sponsors">
+    <img src="https://i.postimg.cc/D0wRHXnZ/trashed-1745296810-577-sin-t-tulo-20250322223143.png" alt="JR Customs">
+    <img src="https://i.postimg.cc/rsZ7kww9/1-sin-t-tulo.png" alt="SixTeenFourRecords">
+    <img src="https://i.postimg.cc/RhYpYpgs/296-sin-t-tulo-20241230195946.png" alt="HzAcademyTeam">
+    <img src="https://i.postimg.cc/WzKj7ngj/52-sin-t-tulo-20250415173806.png" alt="Thproductions">
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 HZ Racing Esport Team. Todos los derechos reservados.</p>
+    <div class="footer-links">
+      <a href="https://mail.google.com/mail/?view=cm&to=hzracingesportteam@gmail.com" target="_blank">Correo</a>
+      <a href="https://www.instagram.com/hzracing_/" target="_blank">Instagram</a>
+      <a href="https://youtube.com/@hz_racing_esport_team?si=3bHgR45JFdeeS0B3" target="_blank">YouTube</a>
+    </div>
+  </footer>
+
+</body>
+</html>
