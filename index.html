@@ -31,23 +31,31 @@
       width: 100px;
     }
 
-    .btn-cronometro {
-      background-color: rgba(255, 255, 255, 0.1);
+    /* Estilo actualizado para el menú de navegación */
+    .nav-menu {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      background-color: transparent;
       color: white;
-      padding: 10px 25px;
-      border-radius: 30px;
+      padding: 8px 16px;
       font-size: 15px;
       text-decoration: none;
       font-weight: 500;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease-in-out;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+      text-align: center;
+      position: relative;
+      top: 0;
+      margin: 0 5px;
     }
 
-    .btn-cronometro:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
+    .nav-btn:hover {
+      top: -3px;
+      color: #00cfff;
+      border-bottom: 2px solid #00cfff;
     }
 
     header {
@@ -287,6 +295,26 @@
         padding: 20px;
         margin: 20px;
       }
+      
+      .nav-menu {
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #00cfff;
+        display: none;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -294,7 +322,11 @@
 
   <div class="top-bar">
     <img src="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png" alt="HZ Racing Logo">
-    <a class="btn-cronometro" href="https://th271441.github.io/CROHZRACING/" target="_blank">Cronómetro</a>
+    <div class="nav-menu">
+        <a class="nav-btn" href="https://forms.gle/JV2Q1uRLgVx1xuRZ6" target="_blank">HZ Academy</a>
+      <a class="nav-btn" href="https://th271441.github.io/CROHZRACING/" target="_blank">Cronómetro</a>
+      
+    </div>
   </div>
 
   <header>
@@ -408,6 +440,9 @@
   <section class="sponsors">
     <img src="https://i.postimg.cc/D0wRHXnZ/trashed-1745296810-577-sin-t-tulo-20250322223143.png" alt="JR Customs">
     <img src="https://i.postimg.cc/rsZ7kww9/1-sin-t-tulo.png" alt="SixTeenFourRecords">
+    <a href="https://fanaticf-one.com" target="_blank">
+        <img src="https://i.postimg.cc/JnxqkNMB/DOC-20250501-WA0007.png" alt="fanaticfone">
+        </a>
     <img src="https://i.postimg.cc/RhYpYpgs/296-sin-t-tulo-20241230195946.png" alt="HzAcademyTeam">
     <img src="https://i.postimg.cc/WzKj7ngj/52-sin-t-tulo-20250415173806.png" alt="Thproductions">
   </section>
