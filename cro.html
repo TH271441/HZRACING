@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronómetro HZ Racing</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png">
+
+  <style>
+    body {
+      margin: 0;
+      background-image: url('https://i.postimg.cc/Y9X4XtyH/download.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    .top-bar img {
+      width: 100px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Menú hamburguesa para móvil */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Estilo del menú principal moderno */
+    .nav-menu {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      background: rgba(0, 15, 40, 0.85);
+      padding: 12px 20px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 207, 255, 0.6);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 4px 20px rgba(0, 207, 255, 0.2);
+      max-width: fit-content;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 10px 18px;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 207, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-btn:hover {
+      color: #00cfff;
+      border-color: rgba(0, 207, 255, 0.8);
+      background: rgba(0, 207, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    .nav-btn.active {
+      color: #00cfff;
+      border-color: rgba(0, 207, 255, 1);
+      background: rgba(0, 207, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
+    }
+
+    /* Contenido principal del cronómetro */
+    .cronometro-container {
+      padding: 140px 20px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+
+    .left-section {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(0, 15, 40, 0.95), rgba(0, 30, 60, 0.9));
+      padding: 30px;
+      border-radius: 25px;
+      border: 2px solid rgba(0, 207, 255, 0.4);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 60px rgba(0, 170, 255, 0.3);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .left-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 80px rgba(0, 170, 255, 0.4);
+      border-color: rgba(0, 207, 255, 0.6);
+    }
+
+    .right-section {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(0, 15, 40, 0.95), rgba(0, 30, 60, 0.9));
+      padding: 30px;
+      border-radius: 25px;
+      border: 2px solid rgba(0, 207, 255, 0.4);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 60px rgba(0, 170, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .right-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 80px rgba(0, 170, 255, 0.4);
+      border-color: rgba(0, 207, 255, 0.6);
+    }
+
+    .cronometro-title {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #00cfff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .button {
+      background: linear-gradient(135deg, #0066ff, #00cfff);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 8px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 207, 255, 0.5);
+      background: linear-gradient(135deg, #0080ff, #00e6ff);
+    }
+
+    .button:disabled {
+      background: rgba(100, 100, 100, 0.5);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .timer {
+      font-size: 48px;
+      margin: 30px 0;
+      font-family: 'DS-Digital', monospace;
+      color: #00cfff;
+      text-shadow: 0 0 30px rgba(0, 207, 255, 0.8);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid rgba(0, 207, 255, 0.3);
+    }
+
+    .current-fastest {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 30px;
+      color: #00ff88;
+      text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .table-container {
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .table-wrapper {
+      overflow-y: auto;
+      max-height: 500px;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 207, 255, 0.3);
+    }
+
+    table {
+      width: 100%;
+      margin: 0;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: rgba(0, 0, 0, 0.2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid rgba(0, 207, 255, 0.2);
+      color: white;
+    }
+
+    th {
+      background: rgba(0, 15, 40, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      color: #00cfff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, rgba(128, 0, 128, 0.8), rgba(255, 0, 255, 0.6));
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+    }
+
+    .interval {
+      color: #A9A9A9;
+      font-style: italic;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        flex-direction: column;
+        background: rgba(0, 15, 40, 0.95);
+        padding: 20px;
+        border-radius: 15px;
+        min-width: 200px;
+        gap: 10px;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        border: 1px solid rgba(0, 207, 255, 0.8);
+      }
+      
+      .nav-menu.active {
+        transform: translateX(0);
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+
+      .cronometro-container {
+        flex-direction: column;
+        padding: 120px 10px 20px;
+        gap: 20px;
+      }
+
+      .cronometro-title {
+        font-size: 2rem;
+      }
+
+      .timer {
+        font-size: 36px;
+        margin: 20px 0;
+        padding: 15px;
+      }
+
+      .button {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 5px;
+      }
+
+      .table-wrapper {
+        max-height: 400px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cronometro-title {
+        font-size: 1.8rem;
+      }
+
+      .timer {
+        font-size: 32px;
+        margin: 15px 0;
+        padding: 12px;
+      }
+
+      .current-fastest {
+        font-size: 20px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <img src="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png" alt="HZ Racing Logo">
+    
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    
+    <div class="nav-menu" id="navMenu">
+      <a class="nav-btn" href="index.html">Inicio</a>
+      <a class="nav-btn active" href="#">Cronómetro</a>
+      <a class="nav-btn" href="camp.html">Campeonatos Internos</a>
+      <a class="nav-btn" href="https://forms.gle/JV2Q1uRLgVx1xuRZ6" target="_blank">HZ Academy</a>
+      <a class="nav-btn" href="pilots.html">Pilotos</a>
+      <a class="nav-btn" href="#contacto">Contacto</a>
+    </div>
+  </div>
+
+  <div class="cronometro-container">
+    <div class="left-section">
+      <h1 class="cronometro-title">Cronómetro HZ Racing</h1>
+
+      <div>
+        <button id="startStopBtn" class="button">Iniciar</button>
+        <button id="saveLapBtn" class="button" disabled>Guardar Lap</button>
+        <button id="resetLapBtn" class="button" disabled>Reiniciar Lap</button>
+      </div>
+
+      <div class="timer">
+        <span id="globalTimer">0:00.000</span>
+      </div>
+
+      <div class="timer">
+        <span id="lapTimer">0:00.000</span>
+      </div>
+
+      <div class="current-fastest">
+        <p>Vuelta Rápida: <span id="fastestLapTime">0:00.000</span></p>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="table-container">
+        <div class="table-wrapper">
+          <table id="lapTable">
+            <thead>
+              <tr>
+                <th>Lap #</th>
+                <th>Lap Time</th>
+                <th>Interval</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Las vueltas se añadirán aquí dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let globalTimerInterval;
+    let lapTimerInterval;
+    let globalTime = 0;
+    let lapTime = 0;
+    let lapCount = 0;
+    let fastestLapTime = null;
+
+    const startStopBtn = document.getElementById("startStopBtn");
+    const saveLapBtn = document.getElementById("saveLapBtn");
+    const resetLapBtn = document.getElementById("resetLapBtn");
+    const globalTimerDisplay = document.getElementById("globalTimer");
+    const lapTimerDisplay = document.getElementById("lapTimer");
+    const lapTable = document.getElementById("lapTable").getElementsByTagName("tbody")[0];
+    const fastestLapDisplay = document.getElementById("fastestLapTime");
+
+    startStopBtn.addEventListener("click", startStopTimer);
+    saveLapBtn.addEventListener("click", saveLap);
+    resetLapBtn.addEventListener("click", resetLap);
+
+    function startStopTimer() {
+      if (startStopBtn.textContent === "Iniciar") {
+        startStopBtn.textContent = "Detener";
+        startGlobalTimer();
+        startLapTimer();
+        saveLapBtn.disabled = false;
+        resetLapBtn.disabled = false;
+      } else {
+        startStopBtn.textContent = "Iniciar";
+        stopGlobalTimer();
+        stopLapTimer();
+        saveLapBtn.disabled = true;
+        resetLapBtn.disabled = true;
+      }
+    }
+
+    function startGlobalTimer() {
+      globalTimerInterval = setInterval(() => {
+        globalTime += 10;
+        globalTimerDisplay.textContent = formatTime(globalTime);
+      }, 10);
+    }
+
+    function stopGlobalTimer() {
+      clearInterval(globalTimerInterval);
+    }
+
+    function startLapTimer() {
+      lapTime = 0;
+      lapTimerInterval = setInterval(() => {
+        lapTime += 10;
+        lapTimerDisplay.textContent = formatTime(lapTime);
+      }, 10);
+    }
+
+    function stopLapTimer() {
+      clearInterval(lapTimerInterval);
+    }
+
+    function saveLap() {
+      const lapTimeFormatted = formatTime(lapTime);
+      const interval = calculateInterval(lapTime);
+      const lapRow = lapTable.insertRow();
+      const lapCell = lapRow.insertCell(0);
+      const lapTimeCell = lapRow.insertCell(1);
+      const intervalCell = lapRow.insertCell(2);
+
+      lapCell.textContent = lapCount + 1;
+      lapTimeCell.textContent = lapTimeFormatted;
+      intervalCell.textContent = interval;
+      intervalCell.classList.add('interval');
+
+      if (lapTime < fastestLapTime || fastestLapTime === null) {
+        fastestLapTime = lapTime;
+        fastestLapDisplay.textContent = lapTimeFormatted;
+        lapRow.classList.add("highlight");
+      }
+
+      lapCount++;
+      resetLapTimer();
+      scrollToBottom();
+    }
+
+    function resetLapTimer() {
+      lapTime = 0;
+      lapTimerDisplay.textContent = formatTime(lapTime);
+    }
+
+    function resetLap() {
+      lapTime = 0;
+      lapTimerDisplay.textContent = formatTime(lapTime);
+    }
+
+    function calculateInterval(currentLapTime) {
+      if (fastestLapTime === null) return "+0:00.000";
+      const interval = currentLapTime - fastestLapTime;
+      return interval >= 0 ? `+${formatTime(interval)}` : `-${formatTime(Math.abs(interval))}`;
+    }
+
+    function formatTime(time) {
+      const minutes = Math.floor(time / 60000);
+      const seconds = Math.floor((time % 60000) / 1000);
+      const milliseconds = time % 1000;
+      return `${padZero(minutes)}:${padZero(seconds)}.${padZero(milliseconds, 3)}`;
+    }
+
+    function padZero(num, length = 2) {
+      return num.toString().padStart(length, "0");
+    }
+
+    function scrollToBottom() {
+      const tableWrapper = document.querySelector('.table-wrapper');
+      tableWrapper.scrollTop = tableWrapper.scrollHeight;
+    }
+
+    // Funciones del menú
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('active');
+    }
+
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Cerrar menú al hacer clic en un enlace (para móvil)
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('active');
+      });
+    });
+
+    // Animación suave para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
