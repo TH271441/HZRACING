@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Campeonatos Internos - HZ Racing Esport Team</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png">
+
+  <style>
+    body {
+      margin: 0;
+      background-image: url('https://i.postimg.cc/Y9X4XtyH/download.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 100;
+    }
+
+    .top-bar img {
+      width: 100px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Menú hamburguesa para móvil */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Estilo del menú principal moderno */
+    .nav-menu {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      background: rgba(0, 15, 40, 0.85);
+      padding: 12px 20px;
+      border-radius: 40px;
+      border: 1px solid rgba(0, 207, 255, 0.6);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 4px 20px rgba(0, 207, 255, 0.2);
+      max-width: fit-content;
+    }
+
+    .nav-btn {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 10px 18px;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 20px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 207, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-btn:hover {
+      color: #00cfff;
+      border-color: rgba(0, 207, 255, 0.8);
+      background: rgba(0, 207, 255, 0.1);
+      box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Clase active agregada para el botón activo */
+    .nav-btn.active {
+      color: #00cfff;
+      border-color: rgba(0, 207, 255, 1);
+      background: rgba(0, 207, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
+    }
+
+    header {
+      padding: 180px 20px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin: 0;
+      color: #00cfff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+      margin-top: 10px;
+    }
+
+    .championships-container {
+      padding: 60px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .championship-card {
+      background: linear-gradient(135deg, rgba(0, 15, 40, 0.95), rgba(0, 30, 60, 0.9));
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(0, 170, 255, 0.3);
+      border: 2px solid rgba(0, 207, 255, 0.4);
+      backdrop-filter: blur(15px);
+      transition: all 0.3s ease;
+      height: fit-content;
+    }
+
+    .championship-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 80px rgba(0, 170, 255, 0.4);
+      border-color: rgba(0, 207, 255, 0.6);
+    }
+
+    .championship-image {
+      width: 100%;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .championship-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .championship-card:hover .championship-image img {
+      transform: scale(1.1);
+    }
+
+    .championship-card h2 {
+      font-size: 1.8rem;
+      color: #00cfff;
+      margin: 15px 0;
+      font-weight: 700;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+
+    .championship-card p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .winners-section h3 {
+      font-size: 1.3rem;
+      color: #00cfff;
+      margin: 0 0 20px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      border-bottom: 2px solid rgba(0, 207, 255, 0.3);
+      padding-bottom: 8px;
+      text-align: center;
+    }
+
+    .winner-entry {
+      background: rgba(0, 207, 255, 0.1);
+      border: 1px solid rgba(0, 207, 255, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .winner-entry:hover {
+      background: rgba(0, 207, 255, 0.15);
+      border-color: rgba(0, 207, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .winner-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      margin-bottom: 5px;
+    }
+
+    .winner-team {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .winner-year {
+      font-size: 1rem;
+      color: #00cfff;
+      font-weight: 600;
+      background: rgba(0, 207, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(0, 207, 255, 0.4);
+      display: inline-block;
+    }
+
+    .no-winners {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: italic;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      border: 1px dashed rgba(0, 207, 255, 0.3);
+    }
+
+    .trophy-icon {
+      color: #ffd700;
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+
+    /* Footer completamente rediseñado */
+    footer {
+      background: linear-gradient(135deg, rgba(0, 10, 25, 0.95), rgba(0, 20, 40, 0.95));
+      border-top: 3px solid #00cfff;
+      padding: 50px 40px 30px;
+      backdrop-filter: blur(15px);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer-section h3 {
+      color: #00cfff;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .footer-section p {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00cfff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 15px;
+      background: rgba(0, 207, 255, 0.1);
+      border-radius: 25px;
+      border: 1px solid rgba(0, 207, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: rgba(0, 207, 255, 0.2);
+      border-color: rgba(0, 207, 255, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 207, 255, 0.3);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 207, 255, 0.3);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    /* Estilos para dispositivos móviles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        flex-direction: column;
+        background: rgba(0, 15, 40, 0.95);
+        padding: 20px;
+        border-radius: 15px;
+        min-width: 200px;
+        gap: 10px;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        border: 1px solid rgba(0, 207, 255, 0.8);
+      }
+
+      .nav-menu.active {
+        transform: translateX(0);
+      }
+
+      .nav-btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .championships-container {
+        grid-template-columns: 1fr;
+        padding: 40px 20px;
+        gap: 30px;
+      }
+
+      .championship-card {
+        padding: 25px;
+      }
+
+      .championship-card h2 {
+        font-size: 1.6rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .championship-card h2 {
+        font-size: 1.4rem;
+      }
+
+      .championship-image {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <img src="https://i.postimg.cc/XYwpRfDx/296-sin-t-tulo-20241222002215.png" alt="HZ Racing Logo">
+    
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    
+    <div class="nav-menu" id="navMenu">
+      <a class="nav-btn" href="index.html">Inicio</a>
+      <a class="nav-btn" href="cro.html">Cronómetro</a>
+	  <a class="nav-btn active" href="#">Campeonatos Internos</a>
+      <a class="nav-btn" href="https://forms.gle/JV2Q1uRLgVx1xuRZ6" target="_blank">HZ Academy</a>
+      <a class="nav-btn" href="pilots.html">Pilotos</a>
+      <a class="nav-btn" href="#contacto">Contacto</a>
+    </div>
+  </div>
+
+  <header>
+    <h1>Campeonatos Internos</h1>
+    <p class="subtitle">La historia de nuestras batallas más épicas</p>
+  </header>
+
+  <section class="championships-container">
+    
+    <!-- Pilots Cup -->
+    <div class="championship-card">
+      <div class="championship-image">
+        <img src="https://i.postimg.cc/VLCWVxZ6/PilotsC.png" alt="Pilots Cup">
+      </div>
+      
+      <h2>🏁 Pilots Cup </h2>
+      <p>El campeonato intenso donde demuestran su habilidad competitiva.</p>
+      
+      <div class="winners-section">
+        <h3><span class="trophy-icon">🏆</span>Campeones</h3>
+        
+        <div class="no-winners">
+          <p>🏁 Los campeones serán anunciados próximamente...</p>
+        </div>
+        
+        <!-- Ejemplo de entrada de ganador -->
+        <!-- 
+        <div class="winner-entry">
+          <div class="winner-name">Piloto 1</div>
+          <div class="winner-year">2024</div>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <!-- 2.4h Valmora Desert -->
+    <div class="championship-card">
+      <div class="championship-image">
+        <img src="https://i.postimg.cc/sxB4yqVT/2-4hVD.png" alt="Valmora Desert">
+      </div>
+      
+      <h2>🏜️ 2.4h Valmora Desert</h2>
+      <p>Una prueba de resistencia extrema en el desierto más desafiante. 2 horas y 24 minutos de pura adrenalina.</p>
+      
+      <div class="winners-section">
+        <h3><span class="trophy-icon">🏆</span>Campeones</h3>
+        
+        <div class="no-winners">
+          <p>🏜️ Los conquistadores del desierto serán revelados próximamente...</p>
+        </div>
+        
+        <!-- Ejemplo de entrada de ganador con equipo -->
+        <!-- 
+        <div class="winner-entry">
+          <div class="winner-name">piloto1 y 2</div>
+          <div class="winner-team">Equipo</div>
+          <div class="winner-year">2024</div>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <!-- 24Min Cup Series -->
+    <div class="championship-card">
+      <div class="championship-image">
+        <img src="https://i.postimg.cc/nV51TFkg/24M.png" alt="24Min Cup">
+      </div>
+      
+      <h2>⚡ 24M Cup Series</h2>
+      <p>Velocidad pura en su máxima expresión. 24 minutos de carreras sprint donde cada segundo cuenta.</p>
+      
+      <div class="winners-section">
+        <h3><span class="trophy-icon">🏆</span>Campeones</h3>
+        
+        <div class="no-winners">
+          <p>⚡ Los maestros de la velocidad serán coronados próximamente...</p>
+        </div>
+        
+        <!-- Ejemplo de entrada de ganador -->
+        <!-- 
+        <div class="winner-entry">
+          <div class="winner-name">Nombre del Ganador</div>
+          <div class="winner-year">2024</div>
+        </div>
+        -->
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer completamente rediseñado -->
+  <footer id="contacto">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>HZ Racing Esport Team</h3>
+        <p>Pasión convertida en velocidad. Dominando el mundo del simracing con excelencia, disciplina y espíritu competitivo sin límites.</p>
+        <p><strong>Sede:</strong> México 🇲🇽</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Síguenos</h3>
+        <div class="social-links">
+          <a href="https://mail.google.com/mail/?view=cm&to=hzracingesportteam@gmail.com" target="_blank" class="social-link">
+            📧 Correo
+          </a>
+          <a href="https://www.instagram.com/hzracing_/" target="_blank" class="social-link">
+            📷 Instagram
+          </a>
+          <a href="https://youtube.com/@hz_racing_esport_team?si=3bHgR45JFdeeS0B3" target="_blank" class="social-link">
+            📺 YouTube
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Únete al Equipo</h3>
+        <p>¿Tienes lo necesario para formar parte de HZ Racing?</p>
+        <div class="social-links">
+          <a href="https://forms.gle/JV2Q1uRLgVx1xuRZ6" target="_blank" class="social-link">
+            🏁 HZ Academy
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 HZ Racing Esport Team. Todos los derechos reservados. | Diseñado para dominar el simracing mundial</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('navMenu');
+      navMenu.classList.toggle('active');
+    }
+
+    // Cerrar menú al hacer clic fuera de él
+    document.addEventListener('click', function(event) {
+      const navMenu = document.getElementById('navMenu');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        navMenu.classList.remove('active');
+      }
+    });
+
+    // Cerrar menú al hacer clic en un enlace (para móvil)
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('active');
+      });
+    });
+
+    // Animación suave para enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
