@@ -1,0 +1,1161 @@
+/* ========================================
+   VARIABLES CSS GLOBALES
+   ======================================== */
+:root {
+  --primary-color: #00cfff;
+  --primary-dark: rgba(0, 15, 40, 0.95);
+  --primary-medium: rgba(0, 30, 60, 0.9);
+  --text-white: white;
+  --text-light: rgba(255, 255, 255, 0.8);
+  --text-gray: rgba(255, 255, 255, 0.7);
+  --shadow-primary: rgba(0, 170, 255, 0.3);
+  --shadow-hover: rgba(0, 170, 255, 0.4);
+  --border-primary: rgba(0, 207, 255, 0.4);
+  --border-hover: rgba(0, 207, 255, 0.6);
+  --gold-color: #ffd700;
+}
+
+/* ========================================
+   ESTILOS BASE
+   ======================================== */
+body {
+  margin: 0;
+  background-image: url('https://i.postimg.cc/Y9X4XtyH/download.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-white);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ========================================
+   TOP BAR Y LOGO
+   ======================================== */
+.top-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
+}
+
+.top-bar img {
+  width: 100px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* ========================================
+   MENÚ DE NAVEGACIÓN
+   ======================================== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-white);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  background: rgba(0, 15, 40, 0.85);
+  padding: 12px 20px;
+  border-radius: 40px;
+  border: 1px solid var(--border-hover);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 20px rgba(0, 207, 255, 0.2);
+  max-width: fit-content;
+}
+
+.nav-btn {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 18px;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 207, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.nav-btn:hover::before {
+  left: 100%;
+}
+
+.nav-btn:hover {
+  color: var(--primary-color);
+  border-color: rgba(0, 207, 255, 0.8);
+  background: rgba(0, 207, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 207, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.nav-btn:active {
+  transform: translateY(0);
+}
+
+.nav-btn.active {
+  color: var(--primary-color);
+  border-color: rgba(0, 207, 255, 1);
+  background: rgba(0, 207, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 207, 255, 0.4);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+header {
+  padding: 180px 20px 40px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  margin: 0;
+  color: var(--text-white);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+header h1.title-cyan {
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+}
+
+/* ========================================
+   ESTILOS PÁGINA INDEX
+   ======================================== */
+.main-content {
+  padding: 40px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 80px;
+}
+
+.main-content-text {
+  flex: 1.2;
+  text-align: left;
+  max-width: 600px;
+}
+
+.main-content-image {
+  flex: 0.8;
+  max-width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px var(--shadow-hover);
+  border: 3px solid var(--border-hover);
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: transform 0.3s ease;
+}
+
+.main-content-image:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+}
+
+.main-content-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.main-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.main-content p {
+  font-size: 1.3rem;
+  margin: 0 0 18px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+}
+
+.team-bio {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+  padding: 60px 50px;
+  margin: 60px auto;
+  max-width: 1200px;
+  border-radius: 25px;
+  box-shadow: 0 20px 60px var(--shadow-primary);
+  border: 2px solid var(--border-primary);
+  backdrop-filter: blur(15px);
+}
+
+.team-bio h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+}
+
+.team-bio p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  text-align: justify;
+}
+
+.team-bio strong {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.gallery {
+  padding: 80px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+}
+
+.gallery-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 170, 255, 0.7);
+  border: 2px solid #0af;
+  transition: all 0.4s ease;
+  aspect-ratio: 3 / 4;
+  width: 30%;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 170, 255, 0.5);
+  border-color: rgba(0, 207, 255, 0.8);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: var(--text-white);
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.sponsors {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 15, 30, 0.9));
+  padding: 60px 40px;
+  border-top: 3px solid var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.sponsors h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+}
+
+.sponsors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sponsor-item {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 207, 255, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.sponsor-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hover);
+  box-shadow: 0 10px 30px rgba(0, 207, 255, 0.2);
+}
+
+.sponsors img {
+  height: 70px;
+  max-width: 140px;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.sponsor-item:hover img {
+  filter: brightness(1.1);
+}
+
+/* ========================================
+   ESTILOS PÁGINA PILOTOS
+   ======================================== */
+.pilots-container {
+  padding: 60px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+}
+
+.pilot-card {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 20px 60px var(--shadow-primary);
+  border: 2px solid var(--border-primary);
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: 20px;
+  min-height: 380px;
+}
+
+.pilot-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 80px var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.race-number {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #0000ff, #0080FF);
+  color: var(--text-white);
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.pilot-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+}
+
+.pilot-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  gap: 10px;
+  width: 100%;
+}
+
+.pilot-info {
+  margin-bottom: 10px;
+}
+
+.pilot-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.country-flag {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.pilot-surname {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.categories {
+  margin: 0;
+  width: 100%;
+}
+
+.categories-title {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.category-tag {
+  background: rgba(0, 207, 255, 0.2);
+  color: var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
+}
+
+.category-tag:hover {
+  background: rgba(0, 207, 255, 0.3);
+  border-color: var(--border-hover);
+}
+
+.championships {
+  margin: 0;
+  width: 100%;
+}
+
+.championships-title {
+  font-size: 1rem;
+  color: var(--gold-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.star {
+  color: var(--gold-color);
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  animation: twinkle 2s ease-in-out infinite alternate;
+}
+
+.star:nth-child(even) {
+  animation-delay: 1s;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.7; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.pilot-link {
+  margin-top: auto;
+}
+
+.profile-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #0066ff, var(--primary-color));
+  color: var(--text-white);
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3);
+}
+
+.profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 207, 255, 0.5);
+  background: linear-gradient(135deg, #0080ff, #00e6ff);
+}
+
+/* ========================================
+   ESTILOS PÁGINA CAMPEONATOS
+   ======================================== */
+.championships-container {
+  padding: 60px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.championship-card {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+  border-radius: 25px;
+  padding: 30px;
+  box-shadow: 0 20px 60px var(--shadow-primary);
+  border: 2px solid var(--border-primary);
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  height: fit-content;
+}
+
+.championship-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 80px var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.championship-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.championship-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.championship-card:hover .championship-image img {
+  transform: scale(1.1);
+}
+
+.championship-card h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin: 15px 0;
+  font-weight: 700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.championship-card p {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 25px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.winners-section h3 {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin: 0 0 20px;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  border-bottom: 2px solid rgba(0, 207, 255, 0.3);
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.winner-entry {
+  background: rgba(0, 207, 255, 0.1);
+  border: 1px solid rgba(0, 207, 255, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.winner-entry:hover {
+  background: rgba(0, 207, 255, 0.15);
+  border-color: rgba(0, 207, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.winner-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-white);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  margin-bottom: 5px;
+}
+
+.winner-team {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.winner-year {
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  background: rgba(0, 207, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 15px;
+  border: 1px solid var(--border-primary);
+  display: inline-block;
+}
+
+.no-winners {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px dashed rgba(0, 207, 255, 0.3);
+}
+
+.trophy-icon {
+  color: var(--gold-color);
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+/* ========================================
+   ESTILOS PÁGINA CRONÓMETRO
+   ======================================== */
+.cronometro-container {
+  padding: 140px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+.left-section {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+  padding: 30px;
+  border-radius: 25px;
+  border: 2px solid var(--border-primary);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 60px var(--shadow-primary);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.left-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 80px var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.right-section {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+  padding: 30px;
+  border-radius: 25px;
+  border: 2px solid var(--border-primary);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 60px var(--shadow-primary);
+  transition: all 0.3s ease;
+}
+
+.right-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 80px var(--shadow-hover);
+  border-color: var(--border-hover);
+}
+
+.cronometro-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.button {
+  background: linear-gradient(135deg, #0066ff, var(--primary-color));
+  color: var(--text-white);
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 8px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 207, 255, 0.3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 207, 255, 0.5);
+  background: linear-gradient(135deg, #0080ff, #00e6ff);
+}
+
+.button:disabled {
+  background: rgba(100, 100, 100, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.timer {
+  font-size: 48px;
+  margin: 30px 0;
+  font-family: 'DS-Digital', monospace;
+  color: var(--primary-color);
+  text-shadow: 0 0 30px rgba(0, 207, 255, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid rgba(0, 207, 255, 0.3);
+}
+
+.current-fastest {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+  color: #00ff88;
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-container {
+  margin-top: 20px;
+  position: relative;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  max-height: 500px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 207, 255, 0.3);
+}
+
+table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(0, 207, 255, 0.2);
+  color: var(--text-white);
+}
+
+th {
+  background: rgba(0, 15, 40, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.highlight {
+  background: linear-gradient(135deg, rgba(128, 0, 128, 0.8), rgba(255, 0, 255, 0.6));
+  color: var(--text-white);
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+.interval {
+  color: #A9A9A9;
+  font-style: italic;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+footer {
+  background: linear-gradient(135deg, rgba(0, 10, 25, 0.95), rgba(0, 20, 40, 0.95));
+  border-top: 3px solid var(--primary-color);
+  padding: 50px 40px 30px;
+  backdrop-filter: blur(15px);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-section h3 {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.footer-section p {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 15px;
+  background: rgba(0, 207, 255, 0.1);
+  border-radius: 25px;
+  border: 1px solid rgba(0, 207, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: rgba(0, 207, 255, 0.2);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 207, 255, 0.3);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(0, 207, 255, 0.3);
+  color: var(--text-gray);
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   RESPONSIVE - TABLETS
+   ======================================== */
+@media (max-width: 1200px) {
+  .pilots-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    flex-direction: column;
+    background: rgba(0, 15, 40, 0.95);
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 200px;
+    gap: 10px;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    border: 1px solid rgba(0, 207, 255, 0.8);
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+  }
+
+  .nav-btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  /* Index responsive */
+  .main-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .main-content h2 {
+    font-size: 2rem;
+  }
+
+  .main-content p {
+    font-size: 1.1rem;
+  }
+  
+  .main-content-image {
+    margin-top: 20px;
+    max-width: 100%;
+    transform: none;
+  }
+
+  .main-content-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .gallery-grid {
+    flex-direction: column;
+  }
+  
+  .gallery-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .team-bio {
+    padding: 40px 25px;
+    margin: 40px 20px;
+  }
+
+  .team-bio h2 {
+    font-size: 2.2rem;
+  }
+
+  .team-bio p {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+
+  .sponsors-grid {
+    gap: 25px;
+  }
+
+  /* Pilotos responsive */
+  .pilots-container {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 25px;
+  }
+
+  .pilot-card {
+    padding: 25px;
+    min-height: 350px;
+  }
+
+  .pilot-photo {
+    width: 100px;
+    height: 130px;
+  }
+
+  /* Campeonatos responsive */
+  .championships-container {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 30px;
+  }
+
+  .championship-card {
+    padding: 25px;
+  }
+
+  .championship-card h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Cronómetro responsive */
+  .cronometro-container {
+    flex-direction: column;
+    padding: 120px 10px 20px;
+    gap: 20px;
+  }
+
+  .cronometro-title {
+    font-size: 2rem;
+  }
+
+  .timer {
+    font-size: 36px;
+    margin: 20px 0;
+    padding: 15px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin: 5px;
+  }
+
+  .table-wrapper {
+    max-height: 400px;
+  }
+
+  /* Footer responsive */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MÓVILES
+   ======================================== */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  /* Index móvil */
+  .main-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .team-bio h2 {
+    font-size: 1.8rem;
+  }
+
+  .sponsors img {
+    height: 50px;
+    max-width: 100px;
+  }
+
+  /* Pilotos móvil */
+  .pilots-container {
+    grid-template-columns: 1fr;
+    padding: 30px 15px;
+    gap: 20px;
+  }
+
+  .pilot-photo {
+    width: 90px;
+    height: 120px;
+  }
+
+  .race-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    top: 15px;
+    right: 15px;
+  }
+
+  .pilot-card {
+    min-height: 320px;
+    padding: 20px;
+  }
+
+  /* Campeonatos móvil */
+  .championship-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .championship-image {
+    height: 150px;
+  }
+
+  /* Cronómetro móvil */
+  .cronometro-title {
+    font-size: 1.8rem;
+  }
+
+  .timer {
+    font-size: 32px;
+    margin: 15px 0;
+    padding: 12px;
+  }
+
+  .current-fastest {
+    font-size: 20px;
+    padding: 12px;
+  }
+}
